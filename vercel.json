@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "ecommerce",
+  "buildCommand": "prisma generate && next build",
   "functions": {
     "src/app/api/**/*.ts": {
       "maxDuration": 30
