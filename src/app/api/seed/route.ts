@@ -98,11 +98,15 @@ export async function POST() {
       admin: { email: 'admin@example.com', password: 'admin123' }
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Seed error:', error);
     return NextResponse.json({ 
       success: false, 
-      error: 'Failed to seed database' 
+      error: 'Failed to seed database',
+      details: error?.message || 'Unknown error',
+      stack: error?.stack
     }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }
