@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 import Papa from 'papaparse';
 
 const prisma = new PrismaClient();
@@ -13,13 +13,13 @@ export async function GET() {
       },
       orderBy: { createdAt: 'desc' },
     });
-    const data = orders.map(o => ({
+    const data = orders.map((o: any) => ({
       id: o.id,
       user: o.user?.email || o.userId,
       total: o.total,
       status: o.status,
       createdAt: o.createdAt,
-      items: JSON.stringify(o.items.map(i => ({
+      items: JSON.stringify(o.items.map((i: any) => ({
         name: i.product?.name || i.productId,
         quantity: i.quantity,
         price: i.price,

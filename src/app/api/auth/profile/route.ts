@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 import bcrypt from 'bcryptjs';
 import { promises as fs } from 'fs';
 import path from 'path';

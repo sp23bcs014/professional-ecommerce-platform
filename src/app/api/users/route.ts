@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -49,7 +49,7 @@ export async function DELETE(req: NextRequest) {
     }
     
     // First delete related data (orders, reviews, etc.) in a transaction
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: any) => {
       // Delete reviews first
       await tx.review.deleteMany({ where: { userId } });
       

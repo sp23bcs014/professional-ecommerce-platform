@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 import nodemailer from 'nodemailer';
 
 const prisma = new PrismaClient();
@@ -58,20 +58,20 @@ export async function POST(req: NextRequest) {
     
     // If cartItemIds provided, filter items
     const selectedItems = Array.isArray(cartItemIds) && cartItemIds.length > 0
-      ? cart.items.filter(item => cartItemIds.includes(item.id))
+      ? cart.items.filter((item: any) => cartItemIds.includes(item.id))
       : cart.items;
       
     if (selectedItems.length === 0) {
       return NextResponse.json({ error: 'No items selected' }, { status: 400 });
     }
     
-    console.log('Selected items for order:', selectedItems.map(i => ({ id: i.id, productId: i.productId, quantity: i.quantity })));
+    console.log('Selected items for order:', selectedItems.map((i: any) => ({ id: i.id, productId: i.productId, quantity: i.quantity })));
     
     // Use a transaction to ensure both order creation and cart cleanup happen together
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // Get product details for the order items
       const items = await Promise.all(
-        selectedItems.map(async (item) => {
+        selectedItems.map(async (item: any) => {
           const product = await tx.product.findUnique({ where: { id: item.productId } });
           if (!product) {
             throw new Error(`Product ${item.productId} not found`);
@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       
       // Remove only checked out items from cart
       const deletedItems = await tx.cartItem.deleteMany({ 
-        where: { id: { in: selectedItems.map(i => i.id) } } 
+        where: { id: { in: selectedItems.map((i: any) => i.id) } } 
       });
       
       console.log('Deleted cart items:', deletedItems.count);
@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
           },
         });
         
-        const itemsHtml = result.items.map(item => 
+        const itemsHtml = result.items.map((item: any) => 
           `<li>${item.quantity} x ${item.product?.name || `Product ${item.productId}`} ($${item.price.toFixed(2)} each)</li>`
         ).join('');
         
@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
           from: 'Your Business Name <no-reply@yourdomain.com>',
           to: result.user.email,
           subject: `Order Confirmation - Order #${result.id}`,
-          text: `Thank you for your order!\n\nOrder #${result.id}\nTotal: $${result.total.toFixed(2)}\n\nItems:\n${result.items.map(item => `${item.quantity} x ${item.product?.name || `Product ${item.productId}`} ($${item.price.toFixed(2)} each)`).join('\n')}`,
+          text: `Thank you for your order!\n\nOrder #${result.id}\nTotal: $${result.total.toFixed(2)}\n\nItems:\n${result.items.map((item: any) => `${item.quantity} x ${item.product?.name || `Product ${item.productId}`} ($${item.price.toFixed(2)} each)`).join('\n')}`,
           html: `<h2>Thank you for your order!</h2><p>Order <b>#${result.id}</b></p><p>Total: <b>$${result.total.toFixed(2)}</b></p><ul>${itemsHtml}</ul>`
         });
         

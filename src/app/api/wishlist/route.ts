@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -51,12 +51,12 @@ export async function GET(req: NextRequest) {
     }
 
     // Calculate average rating for each product
-    const itemsWithRating = wishlist.items.map(item => ({
+    const itemsWithRating = wishlist.items.map((item: any) => ({
       ...item,
       product: {
         ...item.product,
         rating: item.product.reviews.length > 0 
-          ? item.product.reviews.reduce((sum, r) => sum + r.rating, 0) / item.product.reviews.length
+          ? item.product.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / item.product.reviews.length
           : null
       }
     }));

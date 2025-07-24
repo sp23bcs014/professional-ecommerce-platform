@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -14,7 +14,7 @@ export async function GET() {
       prisma.user.count(),
       prisma.product.findMany(),
     ]);
-    const totalSales = orders.reduce((sum, o) => sum + o.total, 0);
+    const totalSales = orders.reduce((sum: number, o: any) => sum + o.total, 0);
     const totalOrders = orders.length;
     const totalUsers = users;
     const totalProducts = products.length;
@@ -23,7 +23,7 @@ export async function GET() {
     for (const order of orders) {
       for (const item of order.items) {
         if (!productSales[item.productId]) {
-          const prod = products.find(p => p.id === item.productId);
+          const prod = products.find((p: any) => p.id === item.productId);
           productSales[item.productId] = { name: prod?.name || 'Product', sold: 0 };
         }
         productSales[item.productId].sold += item.quantity;
@@ -42,10 +42,10 @@ export async function GET() {
     const trend = {
       labels: months.map(m => m.label),
       sales: months.map(m =>
-        orders.filter(o => {
+        orders.filter((o: any) => {
           const d = new Date(o.createdAt);
           return d >= m.start && d <= m.end;
-        }).reduce((sum, o) => sum + o.total, 0)
+        }).reduce((sum: number, o: any) => sum + o.total, 0)
       ),
     };
     return NextResponse.json({ totalSales, totalOrders, totalUsers, totalProducts, bestSeller, trend });

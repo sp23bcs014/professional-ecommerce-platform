@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../../generated/prisma';
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -56,8 +56,8 @@ export async function GET(req: NextRequest) {
         products,
         categories,
         suggestions: [
-          ...products.map(p => ({ type: 'product', ...p })),
-          ...categories.map(c => ({ type: 'category', ...c }))
+          ...products.map((p: any) => ({ type: 'product', ...p })),
+          ...categories.map((c: any) => ({ type: 'category', ...c }))
         ]
       });
     }
@@ -94,7 +94,7 @@ export async function GET(req: NextRequest) {
     });
 
     // Calculate average rating and add primary image
-    const productsWithRating = products.map(product => ({
+    const productsWithRating = products.map((product: any) => ({
       ...product,
       rating: product.reviews.length > 0 
         ? product.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / product.reviews.length
