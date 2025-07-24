@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Professional E-commerce Platform
 
-## Getting Started
+A modern, feature-rich e-commerce platform built with Next.js 14, TypeScript, and Prisma. Perfect for businesses looking to establish a professional online presence with complete user management, payment processing, and admin dashboard capabilities.
 
-First, run the development server:
+## 🚀 Features
 
+### Customer Features
+- **User Authentication** - Complete registration, login, and profile management
+- **Product Catalog** - Browse products with detailed information and images
+- **Shopping Cart** - Add/remove items with persistent cart state
+- **Secure Checkout** - Stripe payment integration with order confirmation
+- **Order History** - Track orders and view purchase history
+- **Email Notifications** - Automated order confirmations and updates
+
+### Admin Dashboard
+- **Product Management** - Add, edit, delete products with image upload
+- **Order Management** - View and update order status and tracking
+- **User Management** - Manage customer accounts and permissions
+- **Analytics** - Sales reporting and business insights
+- **Activity Logging** - Track all admin actions for security
+
+### Technical Features
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
+- **Database** - SQLite with Prisma ORM for development
+- **File Uploads** - Secure image upload and storage
+- **Search & Filtering** - Advanced product search capabilities
+- **SEO Optimized** - Next.js App Router with metadata API
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14.2.3, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Database**: SQLite (development), PostgreSQL (production ready)
+- **Payments**: Stripe Integration
+- **Authentication**: NextAuth.js
+- **Email**: SMTP with Nodemailer
+- **Deployment**: Vercel Ready
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sp23bcs014/professional-ecommerce-platform.git
+cd professional-ecommerce-platform
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Edit .env.local with your configuration
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Set up the database:
+```bash
+npx prisma migrate dev
+npx prisma db seed
+```
 
-## Learn More
+5. Run the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env.local` and configure:
 
-## Deploy on Vercel
+- `DATABASE_URL` - Database connection string
+- `NEXTAUTH_SECRET` - Authentication secret key
+- `NEXTAUTH_URL` - Application URL
+- `STRIPE_SECRET_KEY` - Stripe payment processing
+- `STRIPE_PUBLISHABLE_KEY` - Stripe public key
+- `SMTP_HOST` - Email server configuration
+- `SMTP_PORT` - Email server port
+- `SMTP_USER` - Email username
+- `SMTP_PASS` - Email password
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This application is optimized for deployment on Vercel:
+
+1. Push your code to GitHub
+2. Connect your GitHub repository to Vercel
+3. Configure environment variables in Vercel dashboard
+4. Deploy with automatic builds on push
+
+## 📊 Admin Access
+
+Default admin credentials (change immediately):
+- Email: admin@example.com
+- Password: admin123
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is available for commercial use. Perfect for client projects and portfolio demonstrations.
+
+## 💼 Professional Services
+
+This platform represents professional-grade e-commerce development suitable for:
+- Small to medium businesses
+- Startup e-commerce ventures
+- Portfolio demonstrations
+- Client project foundations
+
+**Estimated Project Value**: $1,200 - $1,800 USD
+
+---
+
+Built with ❤️ using Next.js and modern web technologies.
