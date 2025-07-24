@@ -20,8 +20,20 @@ export async function POST() {
       },
     });
 
-    // Clear existing products first
+    // Clear existing data in correct order (deepest dependencies first)
+    await prisma.recentlyViewed.deleteMany({});
+    await prisma.wishlistItem.deleteMany({});
+    await prisma.wishlist.deleteMany({});
+    await prisma.productImage.deleteMany({});
+    await prisma.productVariant.deleteMany({});
+    await prisma.orderItem.deleteMany({});
+    await prisma.order.deleteMany({});
+    await prisma.cartItem.deleteMany({});
+    await prisma.cart.deleteMany({});
+    await prisma.review.deleteMany({});
     await prisma.product.deleteMany({});
+    await prisma.category.deleteMany({});
+    await prisma.activityLog.deleteMany({}); 
     
     // Create products
     await prisma.product.createMany({
