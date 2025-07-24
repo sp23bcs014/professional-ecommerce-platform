@@ -20,9 +20,11 @@ export async function POST() {
       },
     });
 
+    // Clear existing products first
+    await prisma.product.deleteMany({});
+    
     // Create products
     await prisma.product.createMany({
-      skipDuplicates: true,
       data: [
         {
           name: 'Modern Chair',
