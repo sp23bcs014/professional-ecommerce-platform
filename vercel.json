@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "ecommerce",
+  "name": "ecommerce-platform-demo",
   "buildCommand": "prisma generate && next build",
   "functions": {
     "src/app/api/**/*.ts": {
