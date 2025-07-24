@@ -30,7 +30,7 @@ export default function DemoLoginPage() {
         
         // Redirect based on admin status
         if (data.isAdmin) {
-          router.push('/admin');
+          router.push('/static-admin');
         } else {
           router.push('/');
         }
