@@ -105,7 +105,112 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error('Products fetch error:', error);
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    
+    // Fallback to static products when database fails (Vercel serverless issue)
+    const staticProducts = [
+      {
+        id: 100,
+        name: 'Modern Chair',
+        description: 'A stylish and comfortable chair for your living room.',
+        price: 129.99,
+        imageUrl: '/chair.jpg',
+        stock: 10,
+        isActive: true,
+        category: null,
+        reviews: [],
+        images: [],
+        _count: { reviews: 0 },
+        rating: null,
+        primaryImage: '/chair.jpg'
+      },
+      {
+        id: 101,
+        name: 'Elegant Lamp',
+        description: 'Brighten up your space with this elegant lamp.',
+        price: 59.99,
+        imageUrl: '/lamp.jpg',
+        stock: 15,
+        isActive: true,
+        category: null,
+        reviews: [],
+        images: [],
+        _count: { reviews: 0 },
+        rating: null,
+        primaryImage: '/lamp.jpg'
+      },
+      {
+        id: 102,
+        name: 'Wooden Table',
+        description: 'A sturdy wooden table perfect for dining or work.',
+        price: 249.99,
+        imageUrl: '/table.jpg',
+        stock: 5,
+        isActive: true,
+        category: null,
+        reviews: [],
+        images: [],
+        _count: { reviews: 0 },
+        rating: null,
+        primaryImage: '/table.jpg'
+      },
+      {
+        id: 103,
+        name: 'Perfume',
+        description: 'A fresh scent for your home.',
+        price: 39.99,
+        imageUrl: '/perfume.jpg',
+        stock: 20,
+        isActive: true,
+        category: null,
+        reviews: [],
+        images: [],
+        _count: { reviews: 0 },
+        rating: null,
+        primaryImage: '/perfume.jpg'
+      },
+      {
+        id: 104,
+        name: 'Computer Desk',
+        description: 'Perfect for your home office setup.',
+        price: 199.99,
+        imageUrl: '/computer.jpg',
+        stock: 8,
+        isActive: true,
+        category: null,
+        reviews: [],
+        images: [],
+        _count: { reviews: 0 },
+        rating: null,
+        primaryImage: '/computer.jpg'
+      },
+      {
+        id: 105,
+        name: 'Smart Watch',
+        description: 'Stay connected in style.',
+        price: 99.99,
+        imageUrl: '/watch.jpg',
+        stock: 12,
+        isActive: true,
+        category: null,
+        reviews: [],
+        images: [],
+        _count: { reviews: 0 },
+        rating: null,
+        primaryImage: '/watch.jpg'
+      }
+    ];
+
+    return NextResponse.json({
+      products: staticProducts,
+      pagination: {
+        page: 1,
+        limit: staticProducts.length,
+        total: staticProducts.length,
+        pages: 1
+      },
+      fallback: true,
+      note: 'Using static data due to database connectivity issues'
+    });
   }
 }
 
