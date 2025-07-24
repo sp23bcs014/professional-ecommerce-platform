@@ -1,7 +1,26 @@
-import { PrismaClient } from '../src/generated/prisma/index.js';
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+
 const prisma = new PrismaClient();
 
 async function main() {
+  // Create admin user
+  const hashedPassword = await bcrypt.hash('admin123', 10);
+  
+  await prisma.user.upsert({
+    where: { email: 'admin@example.com' },
+    update: {},
+    create: {
+      email: 'admin@example.com',
+      name: 'Admin User',
+      password: hashedPassword,
+      isAdmin: true,
+    },
+  });
+
+  console.log('Admin user created: admin@example.com / admin123');
+
+  // Create products
   await prisma.product.createMany({
     data: [
       {
@@ -70,6 +89,10 @@ async function main() {
     ],
    
   });
+
+  console.log('✅ Database seeded successfully!');
+  console.log('🛍️ Added products to the store');
+  console.log('👨‍💼 Admin login: admin@example.com / admin123');
 }
 
 main()
