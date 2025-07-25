@@ -2,6 +2,8 @@
 
 A modern, feature-rich e-commerce platform built with Next.js 14, TypeScript, and Prisma. Perfect for businesses looking to establish a professional online presence with complete user management, payment processing, and admin dashboard capabilities.
 
+🔗 **Live Demo**: [professional-ecommerce-platform-cdx.vercel.app](https://professional-ecommerce-platform-cdx.vercel.app)
+
 ## 🚀 Features
 
 ### Customer Features
